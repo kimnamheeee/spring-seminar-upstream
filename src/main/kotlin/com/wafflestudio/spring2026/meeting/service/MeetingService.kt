@@ -21,4 +21,6 @@ class MeetingService(
     fun getMeeting(id: Long): Meeting =
         meetingRepository.findById(id)
             ?: throw MeetingNotFoundException(id)
+
+    fun getMeetings(): List<Meeting> = meetingRepository.findAll()
 }

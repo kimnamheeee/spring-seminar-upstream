@@ -44,4 +44,10 @@ class MeetingController(
             MeetingResponse.from(meeting),
         )
     }
+
+    @GetMapping
+    fun getMeetings(): ResponseEntity<List<MeetingResponse>> =
+        ResponseEntity.ok(
+            meetingService.getMeetings().map(MeetingResponse::from),
+        )
 }
