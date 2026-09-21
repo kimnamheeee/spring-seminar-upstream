@@ -23,4 +23,7 @@ class MeetingService(
             ?: throw MeetingNotFoundException(id)
 
     fun getMeetings(): List<Meeting> = meetingRepository.findAll()
+
+    fun updateMeeting(id: Long, title: String?, capacity: Int?): Meeting =
+        meetingRepository.update(id, title, capacity) ?: throw MeetingNotFoundException(id)
 }

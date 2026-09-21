@@ -28,4 +28,17 @@ class MeetingRepository {
     fun findById(id: Long): Meeting? = meetings[id]
 
     fun findAll(): List<Meeting> = meetings.values.toList()
+
+    fun update(id: Long, title: String?, capacity: Int?): Meeting? {
+        val existing = meetings[id] ?: return null
+
+        val updated = Meeting(
+            id = existing.id,
+            title = title ?: existing.title,
+            capacity = capacity ?: existing.capacity,
+        )
+
+        meetings[id] = updated
+        return updated
+    }
 }

@@ -1,12 +1,14 @@
 package com.wafflestudio.spring2026.meeting.controller
 
 import com.wafflestudio.spring2026.meeting.dto.MeetingCreateRequest
+import com.wafflestudio.spring2026.meeting.dto.MeetingPatchRequest
 import com.wafflestudio.spring2026.meeting.dto.MeetingResponse
 import com.wafflestudio.spring2026.meeting.service.MeetingService
 import jakarta.validation.Valid
 import java.net.URI
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -50,4 +52,16 @@ class MeetingController(
         ResponseEntity.ok(
             meetingService.getMeetings().map(MeetingResponse::from),
         )
+
+    @PatchMapping("/{id}")
+    fun updateMeeting(
+        @PathVariable("id") id: Long,
+        @Valid @RequestBody request: MeetingPatchRequest,
+    ): ResponseEntity<MeetingResponse> {
+        val meeting = meetingService.updateMeeting(id, request.title, request.capacity)
+
+        return ResponseEntity.ok(
+            MeetingResponse.from(meeting)
+        )
+    }
 }
