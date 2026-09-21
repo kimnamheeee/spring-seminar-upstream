@@ -41,4 +41,6 @@ class MeetingRepository {
         meetings[id] = updated
         return updated
     }
+
+    fun delete(id: Long): Meeting? = meetings.remove(id)
 }

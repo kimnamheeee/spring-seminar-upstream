@@ -26,4 +26,8 @@ class MeetingService(
 
     fun updateMeeting(id: Long, title: String?, capacity: Int?): Meeting =
         meetingRepository.update(id, title, capacity) ?: throw MeetingNotFoundException(id)
+
+    fun deleteMeeting(id: Long) {
+        meetingRepository.delete(id) ?: throw MeetingNotFoundException(id)
+    }
 }
